@@ -1,0 +1,26 @@
+# print the list of active DAGS
+airflow dags list
+
+# print the list of tasks in the `tutorial_v03` DAG
+airflow tasks list tutorial_v03
+
+# prints the hierarchy of tasks in the `tutorial_v03` DAG
+airflow tasks list tutorial_v03 --tree
+
+# testing `print_date` task
+airflow tasks test tutorial_v03 print_date 2020-03-01
+
+# testing `sleep` task
+airflow tasks test tutorial_v03 sleep 2020-03-01
+
+# testing `templated` task
+airflow tasks test tutorial_v03 templated 2020-03-01
+
+# start your backfill on a date range
+airflow dags backfill tutorial_v03 \
+    --start-date 2016-02-01 \
+    --end-date 2016-02-15
+
+# clear failed tasks
+airflow tasks clear  -s <your_start_date> -e <end_date> <dag_id>
+airflow tasks clear -s 2023-10-01 -e 2023-10-08 tutorial_v03
